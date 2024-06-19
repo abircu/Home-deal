@@ -1,4 +1,4 @@
-import Logo from '@/assets/logo/logo-web-homedeal.svg'
+import Logo from '@/assets/logo/logo-web-homedeal.svg';
 const Header = () => {
     return (
         <div className="header white-header" id="header">
@@ -8,10 +8,7 @@ const Header = () => {
                         <div className="market-header">
                             <div>
                                 <a href="#" target="_self">
-                                    <img
-                                        src={Logo}
-                                        alt="logo"
-                                    />
+                                    <img src={Logo} alt="logo" />
                                 </a>
                             </div>
                             <div className="d-flex align-items-center">
@@ -33,7 +30,8 @@ const Header = () => {
                                         </g>
                                     </svg>
                                     <span className="sd-ml-0_5">
-                                        <strong>700+</strong> aangesloten vakmensen
+                                        <strong>700+</strong> aangesloten
+                                        vakmensen
                                     </span>
                                 </div>
                                 <a
