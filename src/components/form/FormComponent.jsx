@@ -1,5 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import FormTitle from './FormTitle';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
 
 const FormComponent = ({ step, setStep }) => {
     const [formData, setFormData] = useState({
@@ -7,78 +12,39 @@ const FormComponent = ({ step, setStep }) => {
         city: '',
         address: '',
         address_number: '',
+        company_name: '',
+        gender: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        email: '',
     });
     const [formErrors, setFormErrors] = useState({
         postcode: '',
         city: '',
         address: '',
         address_number: '',
+        company_name: '',
+        gendder: '',
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        email: '',
     });
-    const [submitting, setSubmitting] = useState(false);
+    const [touched, setTouched] = useState({
+        postcode: false,
+        city: false,
+        address: false,
+        address_number: false,
+        company_name: false,
+        gender: false,
+        first_name: false,
+        last_name: false,
+        phone_number: false,
+        email: false,
+    });
 
-    const categories = {
-        contractors: {
-            name: 'contractors',
-            description: 'Verbouwen en renoveren',
-            site: 21,
-            types: {
-                house_expansion_installation: {
-                    name: 'house_expansion_installation',
-                    description: 'Aanbouw plaatsen',
-                },
-                building_house: {
-                    name: 'building_house',
-                    description: 'Nieuw huis bouwen',
-                },
-                attic_renovation: {
-                    name: 'attic_renovation',
-                    description: 'Zolder verbouwen',
-                },
-                garage_renovation: {
-                    name: 'garage_renovation',
-                    description: 'Garage verbouwen',
-                },
-                cellar_renovation: {
-                    name: 'cellar_renovation',
-                    description: 'Kelder verbouwen',
-                },
-                new_storey_installation: {
-                    name: 'new_storey_installation',
-                    description: 'Opbouw plaatsen',
-                },
-                renovation_general: {
-                    name: 'renovation_general',
-                    description: 'Verbouwen en renoveren - algemeen',
-                },
-            },
-        },
-        kitchen: {
-            name: 'kitchen',
-            description: 'Keuken',
-            site: 255,
-            types: {
-                kitchen_remodeling: {
-                    name: 'kitchen_remodeling',
-                    description: 'Keuken verbouwen',
-                },
-            },
-        },
-        plumbers: {
-            name: 'plumbers',
-            description: 'Badkamer en toilet',
-            site: 239,
-            types: {
-                bathroom_installation_renovation: {
-                    name: 'bathroom_installation_renovation',
-                    description: 'Badkamer plaatsen of verbouwen',
-                },
-                toilet_renovation: {
-                    name: 'toilet_renovation',
-                    description: 'Toilet verbouwen',
-                },
-            },
-        },
-    };
+    const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -86,228 +52,192 @@ const FormComponent = ({ step, setStep }) => {
             ...formData,
             [name]: value,
         });
+        setTouched({
+            ...touched,
+            [name]: true,
+        });
+        validateField(name, value);
+    };
+
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        setTouched({
+            ...touched,
+            [name]: true,
+        });
+        validateField(name, value);
+    };
+
+    const validateField = (name, value) => {
+        let errorMessage = '';
+
+        if (!value) {
+            switch (name) {
+                case 'postcode':
+                    errorMessage = 'Vul a.u.b. uw postcode in';
+                    break;
+                case 'city':
+                    errorMessage = 'Vul a.u.b. uw plaats in';
+                    break;
+                case 'address':
+                    errorMessage = 'Vul a.u.b. uw straatnaam in';
+                    break;
+                case 'address_number':
+                    errorMessage = 'Vul uw huisnummer in';
+                    break;
+                case 'company_name':
+                    errorMessage = 'Vul a.u.b. uw bedrijfsnaam in';
+                    break;
+                case 'gender':
+                    errorMessage = 'Kies a.u.b. uw aanhef';
+                    break;
+                case 'first_name':
+                    errorMessage = 'Vul a.u.b. uw voornaam in';
+                    break;
+                case 'last_name':
+                    errorMessage = 'Vul a.u.b. uw achternaam in';
+                    break;
+                case 'phone_number':
+                    errorMessage = 'Vul a.u.b. uw telefoonnummer in';
+                    break;
+                case 'email':
+                    errorMessage = 'Vul a.u.b. uw e-mailadres in';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        setFormErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: errorMessage,
+        }));
     };
 
     const validateForm = () => {
-        let valid = true;
-        const errors = {
-            postcode: '',
-            city: '',
-            address: '',
-            address_number: '',
-        };
+      let valid = true;
+      const errors = {
+          postcode: '',
+          city: '',
+          address: '',
+          address_number: '',
+          company_name: '',
+          gender: '',
+          first_name: '',
+          last_name: '',
+          phone_number: '',
+          email: '',
+      };
+  
+      // Validation logic based on current step
+      if (step === 1) {
+          if (!formData.postcode) {
+              errors.postcode = 'Vul a.u.b. uw postcode in';
+              valid = false;
+          }
+          if (!formData.city) {
+              errors.city = 'Vul a.u.b. uw plaats in';
+              valid = false;
+          }
+          if (!formData.address) {
+              errors.address = 'Vul a.u.b. uw straatnaam in';
+              valid = false;
+          }
+          if (!formData.address_number) {
+              errors.address_number = 'Vul uw huisnummer in';
+              valid = false;
+          }
+      }
+      else if (step === 3) {
+          if (!formData.first_name) {
+              errors.first_name = 'Vul a.u.b. uw voornaam in';
+              valid = false;
+          }
+          if (!formData.last_name) {
+              errors.last_name = 'Vul a.u.b. uw achternaam in';
+              valid = false;
+          }
+          if (!formData.phone_number) {
+              errors.phone_number = 'Vul a.u.b. uw telefoonnummer in';
+              valid = false;
+          }
+          if (!formData.email) {
+              errors.email = 'Vul a.u.b. uw e-mailadres in';
+              valid = false;
+          }
+      }
+  
+      setFormErrors(errors);
+  
+      setTouched({
+          postcode: true,
+          city: true,
+          address: true,
+          address_number: true,
+          // company_name: true,
+          // gender: true,
+          // first_name: true,
+          // last_name: true,
+          // phone_number: true,
+          // email: true,
 
-        
-        if (!formData.postcode) {
-            errors.postcode = 'Vul a.u.b. uw postcode in';
-            valid = false;
-        }
-        if (!formData.city) {
-            errors.city = 'Vul a.u.b. uw plaats in';
-            valid = false;
-        }
-        if (!formData.address) {
-            errors.address = 'Vul a.u.b. uw straatnaam in';
-            valid = false;
-        }
-        if (!formData.address_number) {
-            errors.address_number = 'Vul uw huisnummer in';
-            valid = false;
-        }
-
-        setFormErrors(errors);
-        return valid;
-    };
+      });
+  
+      return valid;
+  };
+  
 
     const handleSubmit = () => {
         if (validateForm()) {
-            // Proceed to next step or submit form
             setSubmitting(true);
-            // Example: submitFormData(formData);
+            setStep(step + 1);
         }
     };
 
     const progress = () => {
         if (validateForm()) {
-            // Proceed to next step
             setStep(step + 1);
         }
     };
 
     return (
-        <form className="form form-horizontal">
-            <fieldset disabled={step !== 1}>
-                {step === 1 && (
-                    <form>
-                        <div
-                            className={`form-row  ${
-                                formErrors.postcode
-                                    ? 'sd-form-row-invalid'
-                                    : 'sd-form-row-valid'
-                            }`}
-                        >
-                            <div className="form-group col-11 col-md-7">
-                                <div className="position-relative input-text">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${
-                                            formErrors.postcode
-                                                ? 'is-invalid'
-                                                : ''
-                                        }`}
-                                        value={formData.postcode}
-                                        onChange={handleChange}
-                                        name="postcode"
-                                        placeholder="Postcode"
-                                        required
-                                    />
-                                    {formErrors.postcode && (
-                                        <div className="text-danger">
-                                            <div
-                                                className="sd-mt-0_5 p-small"
-                                                style={{ display: 'inline' }}
-                                            >
-                                                {formErrors.postcode}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
+        <form className="form form-horizontal" noValidate>
+            <FormTitle step={step} />
 
-                        <div
-                            className={`form-row  ${
-                                formErrors.city
-                                    ? 'sd-form-row-invalid'
-                                    : 'sd-form-row-valid'
-                            }`}
-                        >
-                            <div className="form-group col-11 col-md-7">
-                                <div className="position-relative input-text">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${
-                                            formErrors.city ? 'is-invalid' : ''
-                                        }`}
-                                        value={formData.city}
-                                        onChange={handleChange}
-                                        name="city"
-                                        placeholder="Plaats"
-                                        required
-                                    />
-                                    {formErrors.city && (
-                                        <div className="text-danger">
-                                            <div
-                                                className="sd-mt-0_5 p-small"
-                                                style={{ display: 'inline' }}
-                                            >
-                                                {formErrors.city}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
+            {/* step1 */}
+            <Step1
+                step={step}
+                touched={touched}
+                formErrors={formErrors}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                formData={formData}
+                submitting={submitting}
+                progress={progress}
+            />
 
-                        <div
-                            className={`form-row  ${
-                                formErrors.address
-                                    ? 'sd-form-row-invalid'
-                                    : 'sd-form-row-valid'
-                            }`}
-                        >
-                            <div className="form-group col-11 col-md-7">
-                                <div className="position-relative input-text">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${
-                                            formErrors.address
-                                                ? 'is-invalid'
-                                                : ''
-                                        }`}
-                                        value={formData.address}
-                                        onChange={handleChange}
-                                        name="address"
-                                        placeholder="Straat"
-                                        required
-                                    />
-                                    {formErrors.address && (
-                                        <div className="text-danger">
-                                            <div
-                                                className="sd-mt-0_5 p-small"
-                                                style={{ display: 'inline' }}
-                                            >
-                                                {formErrors.address}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
+            <Step2
+                step={step}
+                setStep={setStep}
+                submitting={submitting}
+                handleBack={progress}
+            />
 
-                        <div
-                            className={`form-row  ${
-                                formErrors.address_number
-                                    ? 'sd-form-row-invalid'
-                                    : 'sd-form-row-valid'
-                            }`}
-                        >
-                            <div className="form-group col-11 col-md-7">
-                                <div className="position-relative input-text">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${
-                                            formErrors.address_number
-                                                ? 'is-invalid'
-                                                : ''
-                                        }`}
-                                        value={formData.address_number}
-                                        onChange={handleChange}
-                                        name="address_number"
-                                        placeholder="Huisnummer"
-                                        required
-                                        pattern="^([0-9]){1,}.*$"
-                                    />
-                                    {formErrors.address_number && (
-                                        <div className="text-danger">
-                                            <div
-                                                className="sd-mt-0_5 p-small"
-                                                style={{ display: 'inline' }}
-                                            >
-                                                {formErrors.address_number}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="step-navigation form-row">
-                            <div className="col-md-7">
-                                <button
-                                    type="button"
-                                    className="btn btn-arrow btn-primary w-100"
-                                    onClick={progress}
-                                    disabled={submitting}
-                                >
-                                    Ga naar stap 2
-                                </button>
-                                <div className="d-flex align-items-center justify-content-center sd-mt-0_5">
-                                    <span className="check-small sd-mr-0_25"></span>
-                                    <span>Gratis - Vrijblijvend</span>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                )}
-            </fieldset>
+            <Step3
+                step={step}
+                touched={touched}
+                formErrors={formErrors}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                formData={formData}
+                submitting={submitting}
+                progress={progress}
+            />
         </form>
     );
 };
 
 FormComponent.propTypes = {
-    // Define propTypes if any props are passed from parent component
-
     step: PropTypes.number.isRequired,
     setStep: PropTypes.func.isRequired,
 };

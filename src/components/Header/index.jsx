@@ -30,7 +30,7 @@ const Header = () => {
                                         </g>
                                     </svg>
                                     <span className="sd-ml-0_5">
-                                        <strong>700+</strong> aangesloten
+                                        <b>700+</b> aangesloten
                                         vakmensen
                                     </span>
                                 </div>

@@ -1,4 +1,5 @@
 
+import PropTypes from 'prop-types';
 const StepProgressBar = ({ step, setStep }) => {
     const toStep = (stepNumber) => {
         setStep(stepNumber);
@@ -35,6 +36,11 @@ const StepProgressBar = ({ step, setStep }) => {
             </div>
         </div>
     );
+};
+
+StepProgressBar.propTypes = {
+    step: PropTypes.number.isRequired,
+    setStep: PropTypes.func.isRequired,
 };
 
 export default StepProgressBar;

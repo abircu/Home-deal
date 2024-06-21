@@ -16,7 +16,7 @@ const SidePanel = () => {
                     />
                     <span>
                         De laatste aanvraag was
-                        <b>7 minuten geleden</b>
+                        <b> 7 minuten geleden</b>
                     </span>
                 </div>
                 <div className="sd-mt-0_75 d-flex align-items-start">
