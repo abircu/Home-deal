@@ -18,9 +18,9 @@ const Footer = () => {
                 <div className="row">
                     <div className="col-lg-6">
                         <p className="sd-mb-2">
-                            Dien een aanvraag in voor gratis offertes. Vergelijk
-                            vervolgens tot 5 bedrijven, kies de offerte die het
-                            beste bij u past en bespaar tot wel 40%.
+                            Dien een aanvraag in voor een gratis offerte. Wij
+                            voorzien u van een offerte die het beste bij u past,
+                            zodat u tot wel 40% kunt besparen.
                         </p>
                     </div>
                 </div>
@@ -28,7 +28,9 @@ const Footer = () => {
                 <div className="row"></div>
                 <hr />
                 <div className="footer-bottom-list">
-                    <div className="brand">&copy; {new Date().getFullYear()} Bouwreyad</div>
+                    <div className="brand">
+                        &copy; {new Date().getFullYear()} Bouwreyad
+                    </div>
                     {/* <ul className="nav sd-0">
                         <li>
                             <span className="separator">&nbsp;|&nbsp;</span>

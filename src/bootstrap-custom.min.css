@@ -16923,7 +16923,7 @@ svg {
 .white-header {
     z-index: 800;
     height: 64px;
-    background: #fff;
+    background: #f4ca28;
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 0 4px 0 rgba(0, 0, 0, 0.16);
 }
 @media (min-width: 992px) {
@@ -19389,7 +19389,7 @@ body {
 .market-footer {
     padding-top: 2rem;
     margin-top: 3.5rem;
-    background-color: #f8f9fa;
+    background-color: #f4ca28;
 }
 .market-footer .footer-bottom-list {
     -ms-flex-align: normal;
