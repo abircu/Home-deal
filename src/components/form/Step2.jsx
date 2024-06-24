@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
@@ -5,7 +6,7 @@ import PropTypes from 'prop-types';
 import CommonRequestRadio from './CommonRequestRadio';
 // import DatePickerIcon from '@/assets/icons/icon-datepicker.svg';
 
-const Step2 = ({ step, setStep }) => {
+const Step2 = ({ step, setStep, setFormData }) => {
   const [categoryIndex, setCategoryIndex] = useState('');
   const [typeIndex, setTypeIndex] = useState('');
   const [requestType, setRequestType] = useState('');
@@ -49,20 +50,34 @@ const Step2 = ({ step, setStep }) => {
 
   const handleSubmit = () => {
     setSubmitted(true);
-    if (categoryIndex && typeIndex && year && projectDescription) {
-        // setFormData((prev) => ({...prev, categoryIndex, typeIndex, year, projectDescription, requestType, demolitionType, permitType, permitAvailable, constructionDrawingAvailable, materialAvailable, executionDate, buyerIntention, buyingIntentionDecisions, addPhoto, projectDate, demolition }));
+    if (categoryIndex && typeIndex && projectDescription) {
+        setFormData((prev) => ({...prev, categoryIndex, typeIndex, year, projectDescription, requestType, demolitionType, permitType, permitAvailable, constructionDrawingAvailable, materialAvailable, executionDate, buyerIntention, buyingIntentionDecisions, addPhoto, projectDate, demolition }));
         setStep(step + 1);
       }
   };
 
   const getCategoryError = () => (submitted && !categoryIndex ? 'Kies a.u.b. een van bovenstaande opties' : '');
   const getTypeError = () => (submitted && !typeIndex ? 'Kies a.u.b. een van bovenstaande opties' : '');
-  const getYearError = () => (submitted && !year ? 'Dit veld is verplicht' : '');
-  const getRequestTypeError = () => (submitted && !requestType ? 'Dit veld is verplicht' : '');
+  const getYearError = () => {
+    if(categoryIndex === 'contractors' && typeIndex !== 'building_house') {
+      return ''
+    }
+  return    submitted && !year ? 'Dit veld is verplicht' : ''};
+  const getRequestTypeError = () => {
+    if(categoryIndex === 'contractors' || categoryIndex === 'plumbers') {
+      return ''
+    }
+    return submitted && !requestType ? 'Dit veld is verplicht' : ''}
+    ;
   const getDemolitionTypeError = () => (submitted && !demolitionType ? 'Kies alstublieft één van de mogelijkheden' : '');
   const getPermitTypeError = () => (submitted && !permitType ? 'Kies alstublieft één van de mogelijkheden' : '');
   const getPermitAvailableError = () => (submitted && !permitAvailable ? 'Kies alstublieft één van de mogelijkheden' : '');
-  const getConstructionDrawingAvailableError = () => (submitted && !constructionDrawingAvailable ? 'Kies alstublieft één van de mogelijkheden' : '');
+  const getConstructionDrawingAvailableError = () =>{ 
+    if(categoryIndex === 'contractors') {
+      return ''
+    }
+    
+    return submitted && !constructionDrawingAvailable ? 'Kies alstublieft één van de mogelijkheden' : ''};
   const getMaterialAvailableError = () => (submitted && !materialAvailable ? 'Kies alstublieft één van de mogelijkheden' : '');
 
   const getExecutionDateError = () => (submitted && !executionDate ? 'Dit veld is verplicht' : '');
@@ -213,8 +228,8 @@ const Step2 = ({ step, setStep }) => {
             </div>
           )}
 
-          {(categoryIndex === 'contractors' || categoryIndex === 'plumbers') && (
-            <div className={`form-row ${submitted && !requestType ? 'sd-form-row-invalid' : ''}`}>
+          {(categoryIndex === 'contractors' || categoryIndex === 'plumbers') ? (
+            <div className={`form-row ${submitted && (categoryIndex === 'contractors' || categoryIndex === 'plumbers') && !requestType ? 'sd-form-row-invalid' : ''}`}>
               <div className="form-group col-11 col-md-7">
                 <label htmlFor="requestType">Soort aanvraag</label>
                 <CommonRequestRadio
@@ -227,9 +242,9 @@ const Step2 = ({ step, setStep }) => {
                 />
               </div>
             </div>
-          )}
+          ) : null}
         {(categoryIndex === 'contractors' && typeIndex !== 'building_house')&& (
-            <div className={`form-row ${submitted && !year ? 'sd-form-row-invalid' : ''}`}>
+            <div className={`form-row ${submitted &&  (categoryIndex === 'contractors' && typeIndex !== 'building_house') && !year ? 'sd-form-row-invalid' : ''}`}>
                     <div className="form-group col-11 col-md-7">
                         <div className="position-relative input-number">
                             <input
@@ -239,7 +254,7 @@ const Step2 = ({ step, setStep }) => {
                                 placeholder="Bouwjaar woning"
                                 value={year}
                                 onChange={handleYearChange}
-                                required
+                                // required
                             />
                             <span className={`input-icon ${submitted && !year ? 'icon-invalid' : year ? 'icon-valid' : ''}`}></span>
                         </div>
@@ -252,7 +267,7 @@ const Step2 = ({ step, setStep }) => {
                 </div>)}
 
           {(categoryIndex === 'contractors' && typeIndex !== 'building_house' && typeIndex !== 'house_expansion_installation') && (
-            <div className={`form-row ${submitted && !demolitionType ? 'sd-form-row-invalid' : ''}`}>
+            <div className={`form-row ${submitted &&(categoryIndex === 'contractors' && typeIndex !== 'building_house' && typeIndex !== 'house_expansion_installation') && !demolitionType ? 'sd-form-row-invalid' : ''}`}>
               <div className="form-group col-11 col-md-7">
                 <label htmlFor="demolitionType">Sloopwerkzaamheden</label>
                 <CommonRequestRadio
@@ -348,7 +363,7 @@ const Step2 = ({ step, setStep }) => {
            </div>
           )}
 
-{(categoryIndex === 'contractors' || categoryIndex === 'plumbers') && (
+{/* {(categoryIndex === 'contractors' || categoryIndex === 'plumbers') && (
              <div className={`form-row ${submitted && !addPhoto ? 'sd-form-row-invalid' : ''}`}>
              <div className="form-group col-11 col-md-7">
                <label htmlFor="addPhoto">Wilt u foto’s toevoegen?</label>
@@ -363,7 +378,7 @@ const Step2 = ({ step, setStep }) => {
                />
              </div>
            </div>
-          )}
+          )} */}
 
         {(categoryIndex === 'contractors' || categoryIndex === 'kitchen' || categoryIndex === 'plumbers') && (
              <div className={`form-row ${submitted && !buyerIntention ? 'sd-form-row-invalid' : ''}`}>

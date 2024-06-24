@@ -1,4 +1,4 @@
-import Logo from '@/assets/logo/logo-web-homedeal.svg';
+import Logo from '@/assets/logo/logo-web-homedeal.jpg';
 const Header = () => {
     return (
         <div className="header white-header" id="header">
@@ -8,10 +8,15 @@ const Header = () => {
                         <div className="market-header">
                             <div>
                                 <a href="#" target="_self">
-                                    <img src={Logo} alt="logo" />
+                                    <img
+                                        src={Logo}
+                                        alt="logo"
+                                        className="img-fluid"
+                                        style={{width: '120px', height: '70px', objectFit: 'cover'}}
+                                    />
                                 </a>
                             </div>
-                            <div className="d-flex align-items-center">
+                            {/* <div className="d-flex align-items-center">
                                 <div className="d-none d-lg-flex">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +35,7 @@ const Header = () => {
                                         </g>
                                     </svg>
                                     <span className="sd-ml-0_5">
-                                        <b>700+</b> aangesloten
-                                        vakmensen
+                                        <b>700+</b> aangesloten vakmensen
                                     </span>
                                 </div>
                                 <a
@@ -41,7 +45,7 @@ const Header = () => {
                                 >
                                     Bent u een vakman?
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

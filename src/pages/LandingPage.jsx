@@ -25,6 +25,12 @@ const LandingPage = () => {
                                         className="panel panel-bordered position-relative"
                                     >
                                         <FormComponent step={step} setStep={setStep}/>
+
+                                        {step === 4 && (
+                                            <div className='bg-primary p-5 text-white'>
+                                                <h3 className='text-white text-center'>Success</h3>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="col-lg-4">

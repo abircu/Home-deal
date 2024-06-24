@@ -1,10 +1,19 @@
-import Logo from '@/assets/logo/logo-web-homedeal.svg';
+import Logo from '@/assets/logo/logo-web-homedeal.jpg';
 const Footer = () => {
     return (
         <footer className="market-footer border-top">
             <div className="container">
                 <div className="logo sd-mb-1">
-                    <img src={Logo} alt="logo" />
+                    <img
+                        src={Logo}
+                        alt="logo"
+                        className="img-fluid"
+                        style={{
+                            width: '200px',
+                            height: '100px',
+                            objectFit: 'cover',
+                        }}
+                    />
                 </div>
                 <div className="row">
                     <div className="col-lg-6">
@@ -19,33 +28,25 @@ const Footer = () => {
                 <div className="row"></div>
                 <hr />
                 <div className="footer-bottom-list">
-                    <div className="brand">&copy; 2024 Homedeal</div>
-                    <ul className="nav sd-0">
+                    <div className="brand">&copy; {new Date().getFullYear()} Bouwreyad</div>
+                    {/* <ul className="nav sd-0">
                         <li>
                             <span className="separator">&nbsp;|&nbsp;</span>
-                            <a href="#">
-                                Disclaimer
-                            </a>
+                            <a href="#">Disclaimer</a>
                         </li>
                         <li>
                             <span className="separator">&nbsp;|&nbsp;</span>
-                            <a href="#">
-                                Privacy
-                            </a>
+                            <a href="#">Privacy</a>
                         </li>
                         <li>
                             <span className="separator">&nbsp;|&nbsp;</span>
-                            <a href="#">
-                                Cookies
-                            </a>
+                            <a href="#">Cookies</a>
                         </li>
                         <li>
                             <span className="separator">&nbsp;|&nbsp;</span>
-                            <a href="#">
-                                Contact
-                            </a>
+                            <a href="#">Contact</a>
                         </li>
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         </footer>

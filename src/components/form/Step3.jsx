@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
 const Step3 = ({
@@ -8,7 +9,7 @@ const Step3 = ({
     handleBlur,
     formData,
     submitting,
-    progress
+    progress,
 }) => {
     return (
         <fieldset disabled={step !== 3}>
@@ -22,7 +23,7 @@ const Step3 = ({
                         }`}
                     >
                         <div className="form-group col-11 col-md-7">
-                            <div className="position-relative input-text">
+                            {/* <div className="position-relative input-text">
                                 <input
                                     type="text"
                                     className={`form-control upper `}
@@ -43,7 +44,7 @@ const Step3 = ({
                                         }`}
                                     ></span>
                                 )}
-                            </div>
+                            </div> */}
                             {formErrors.company_name &&
                                 touched.company_name && (
                                     <div className="text-danger">
@@ -331,7 +332,7 @@ const Step3 = ({
                         id="request-quotes"
                         className="btn btn-primary w-100"
                         onClick={progress}
-                        disabled={submitting}
+                        // disabled={submitting}
                     >
                         Ontvang offertes
                     </button>
