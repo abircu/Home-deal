@@ -19195,7 +19195,7 @@ body {
 }
 .lead-step-progress-bar .step.active .step-circle {
     color: #fff;
-    background-color: #1493c8;
+    background-color: red;
 }
 .lead-step-progress-bar .step.active .step-label {
     display: block;

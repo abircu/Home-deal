@@ -1,22 +1,26 @@
-import Logo from '@/assets/logo/logo-web-homedeal.jpg';
+import Logo from "@/assets/logo/logo-web-homedeal.jpg";
 const Header = () => {
-    return (
-        <div className="header white-header" id="header">
-            <div className="position-relative">
-                <div className="absolute-menu">
-                    <div className="container">
-                        <div className="market-header">
-                            <div>
-                                <a href="#" target="_self">
-                                    <img
-                                        src={Logo}
-                                        alt="logo"
-                                        className="img-fluid"
-                                        style={{width: '120px', height: '70px', objectFit: 'cover'}}
-                                    />
-                                </a>
-                            </div>
-                            {/* <div className="d-flex align-items-center">
+  return (
+    <div className="header white-header" id="header">
+      <div className="position-relative">
+        <div className="absolute-menu">
+          <div className="container">
+            <div className="market-header">
+              <div>
+                <a href="#" target="_self">
+                  <img
+                    src={Logo}
+                    alt="logo"
+                    className="img-fluid"
+                    style={{
+                      width: "170px",
+                      height: "70px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </a>
+              </div>
+              {/* <div className="d-flex align-items-center">
                                 <div className="d-none d-lg-flex">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +50,12 @@ const Header = () => {
                                     Bent u een vakman?
                                 </a>
                             </div> */}
-                        </div>
-                    </div>
-                </div>
             </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Header;
