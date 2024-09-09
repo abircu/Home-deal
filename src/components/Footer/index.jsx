@@ -1,4 +1,4 @@
-import Logo from "@/assets/logo/logo-web-homedeal.jpg";
+import HomeLogo from "../../assets/logo/home-logo-v2.png";
 const Footer = () => {
   const mystyle = {
     color: "black",
@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <div className="logo sd-mb-1">
           <img
-            src={Logo}
+            src={HomeLogo}
             alt="logo"
             className="img-fluid"
             style={{
